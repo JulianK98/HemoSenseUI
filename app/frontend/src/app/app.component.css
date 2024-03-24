@@ -1,0 +1,11 @@
+.sidebar {
+  align-items: center;
+  text-align: center;
+  width: 30px;
+  padding: 30px;
+  background-color: rgb(240, 238, 238);
+}
+
+.main {
+  background-color: rgb(221, 220, 220);
+}

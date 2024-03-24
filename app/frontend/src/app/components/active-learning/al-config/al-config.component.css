@@ -1,0 +1,176 @@
+.example-h2 {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.example-section {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+}
+
+.example-margin {
+  margin: 8px;
+}
+
+.example-width {
+  max-width: 180px;
+  width: 100%;
+}
+
+.mat-mdc-slider {
+  max-width: 300px;
+  width: 100%;
+}
+
+.mat-mdc-card + .mat-mdc-card {
+  margin-top: 8px;
+}
+
+.example-result-card h2 {
+  margin: 0 8px;
+}
+
+.example-label-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 10px 0;
+  max-width: 284px;
+}
+
+.example-result-card .example-value-label {
+  font-weight: 600;
+}
+
+.box {
+  align-items: center;
+  text-align: center;
+  width: 600px;
+  margin: 25px;
+  overflow: auto;
+  height: 500px;
+  border: 1px solid rgb(0, 52, 95);
+  padding: 30px;
+  border-radius: 5px;
+  background-color: #e9e9e9;
+  color: black;
+}
+
+.box2 {
+  margin-left: 80px;
+  margin-bottom: 15px;
+  align-items: center;
+  justify-content: center;
+}
+
+.box3 {
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 1rem;
+}
+
+.steps-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  width: 100%;
+  padding: 1rem;
+}
+
+.step {
+  width: 800px;
+  flex-basis: 48%;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.15);
+}
+
+.step h2 {
+  font-size: 22px;
+  color: #333;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid #ddd;
+}
+
+.file-input {
+  display: none;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+.btn:active {
+  background-color: #004099;
+}
+
+.btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.upload-info {
+  font-size: 16px;
+  color: #666;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.upload-section {
+  padding-top: 1rem;
+}
+
+.back-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+hr {
+  border: none; /* Remove the default border */
+  height: 1px; /* Set the height of the line */
+  background-color: #333333; /* Set the desired color for the line */
+  margin: 10px 0; /* Add some margin for separation */
+}

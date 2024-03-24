@@ -1,0 +1,139 @@
+# Define the pods that should be running. In this case, a nginx webserver is started.
+# For a more extensive explanation see https://kubernetes.io/docs/concepts/overview/working-with-objects/
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-frontend-deployment
+  labels:
+    app: app-frontend
+  annotations:
+    keel.sh/policy: force # https://keel.sh/docs/#deployment-polling-example
+    keel.sh/trigger: poll
+    keel.sh/pollSchedule: "@every 3m"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-frontend
+  template:
+    metadata:
+      labels:
+        app: app-frontend
+    spec:
+      containers:
+      - name: app-frontend
+        image: gitlab.lrz.de:5005/ldv/teaching/ami/ami2023/projects/group03/frontend:latest
+        ports:
+        - containerPort: 80
+          name: http-web-svc
+      imagePullSecrets:
+        - name: gitlab-registry-secret
+      env:
+        - name: BACKEND_BASE_URL
+          value: "http://app-backend-service:5001"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-backend-deployment
+  labels:
+    app: app-backend
+  annotations:
+    keel.sh/policy: force # https://keel.sh/docs/#deployment-polling-example
+    keel.sh/trigger: poll
+    keel.sh/pollSchedule: "@every 3m"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-backend
+  template:
+    metadata:
+      labels:
+        app: app-backend
+    spec:
+      containers:
+      - name: app-backend
+        image: gitlab.lrz.de:5005/ldv/teaching/ami/ami2023/projects/group03/backend:latest
+        ports:
+        - containerPort: 5001
+          name: http-bck-svc
+        volumeMounts:
+        - mountPath: "/data/ami/"
+          name: share-ami
+        - mountPath: "/data/group/"
+          name: share-group
+        env:
+        - name: AMI_SHARE_DIR
+          value: /data/ami/
+        - name: GROUP_SHARE_DIR
+          value: /data/group/
+      imagePullSecrets:
+        - name: gitlab-registry-secret
+      volumes:
+      - name: share-ami
+        persistentVolumeClaim:
+          claimName: pvc-share-ami
+      - name: share-group
+        persistentVolumeClaim:
+          claimName: pvc-share-group
+#---
+## A service enables us to access our webserver from outside the pod.
+## See https://kubernetes.io/docs/concepts/services-networking/service/
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: app-frontend-service
+#spec:
+#  selector:
+#    app: app-frontend
+#  ports:
+#    - protocol: TCP
+#      port: 80
+#      targetPort: http-web-svc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-backend-service
+spec:
+  selector:
+    app: app-backend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: http-bck-svc
+#---
+#apiVersion: traefik.containo.us/v1alpha1
+#kind: IngressRoute
+#metadata:
+#  name: app-ingress
+#spec:
+#  entryPoints:
+#    - websecure
+#  routes:
+#    - kind: Rule
+#      match: Host(`group03.ami.dedyn.io`)
+#      services:
+#        - kind: Service
+#          name: app-frontend-service
+#          port: 80
+#  tls:
+#    certResolver: myresolver
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: app-backend-ingress
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`group03.ami.dedyn.io`)
+      services:
+        - kind: Service
+          name: app-backend-service
+          port: 80
+  tls:
+    certResolver: myresolver

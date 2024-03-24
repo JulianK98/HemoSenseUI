@@ -1,0 +1,20 @@
+<section class="sidebar">
+  <mat-list class="nav" *ngFor="let route of routeLinks">
+    <a
+      mat-list-item
+      routerLink="/{{ route.link }}"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact: true}"
+      class="hover"
+    >
+      <div class="box">
+        <mat-icon
+          mat-list-icon
+          matTooltipPosition="right"
+          fontIcon="{{ route.icon }}"
+        ></mat-icon>
+        <p matLine>{{ route.name }}</p>
+      </div>
+    </a>
+  </mat-list>
+</section>

@@ -1,0 +1,25 @@
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.box2 {
+  display: table;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 10px;
+  overflow: auto;
+  border: 1px solid rgb(0, 52, 95);
+  padding: 30px;
+  border-radius: 5px;
+  background-color: #e9e9e9;
+  color: black;
+}
+.box3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+}

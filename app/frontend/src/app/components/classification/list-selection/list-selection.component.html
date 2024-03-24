@@ -1,0 +1,104 @@
+<mat-form-field appearance="fill">
+  <mat-label>Select an Option</mat-label>
+  <mat-select
+    [(value)]="selectedOption"
+    (selectionChange)="selectOption($event.value)"
+  >
+    <mat-option *ngFor="let option of dropdownOptions" [value]="option">{{
+      option
+    }}</mat-option>
+  </mat-select>
+</mat-form-field>
+<hr class="divider" />
+<div class="range-selection">
+  <h3>Add Ranges</h3>
+  <p>
+    Add specific ranges for the data within the selected dataset. The selected
+    ranges will be displayed below. Starting at index 0.
+  </p>
+  <div class="image-counter-container">
+    <div class="image-counter">
+      Total amount of data loaded from the data set: {{ typesOfShoes.length }}
+    </div>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="selectAll()"
+      [disabled]="!selectedOption"
+    >
+      Select All
+    </button>
+  </div>
+</div>
+
+<div class="range-selector" [ngClass]="{ 'disabled-content': !selectedOption }">
+  <div *ngFor="let range of rangeList; let i = index">
+    <mat-form-field appearance="fill">
+      <mat-label>Start</mat-label>
+      <input
+        matInput
+        type="number"
+        [min]="getMinStart(i)"
+        [(ngModel)]="range.start"
+        [disabled]="!selectedOption"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>End</mat-label>
+      <input
+        matInput
+        type="number"
+        [min]="range.start"
+        [max]="typesOfShoes.length - 1"
+        [(ngModel)]="range.end"
+        [disabled]="!selectedOption"
+      />
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="applyRange(range)"
+      [disabled]="!selectedOption"
+    >
+      Apply Range
+    </button>
+    <button
+      mat-raised-button
+      color="warn"
+      (click)="removeRange(i)"
+      [disabled]="!selectedOption"
+      *ngIf="isApplied(i)"
+    >
+      X
+    </button>
+  </div>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="addRange()"
+    [disabled]="!selectedOption"
+  >
+    Add Range
+  </button>
+</div>
+
+<mat-selection-list #shoes [ngClass]="{ 'disabled-content': !selectedOption }">
+  <mat-list-option
+    *ngFor="let shoe of typesOfShoes; let i = index"
+    [value]="i"
+    (click)="selectedOption && selectSingle(i)"
+    [disabled]="!selectedOption"
+  >
+    {{ shoe }}
+  </mat-list-option>
+</mat-selection-list>
+
+<div class="options-selected-container">
+  <p [ngClass]="{ 'disabled-content': !selectedOption }">Options selected:</p>
+  <p
+    class="options-selected-text"
+    [ngClass]="{ 'disabled-content': !selectedOption }"
+  >
+    {{ selectedRanges }}
+  </p>
+</div>

@@ -1,0 +1,78 @@
+<div class="header-container">
+  <app-header title="Image Viewer"></app-header>
+</div>
+
+<main class="content">
+  <section class="steps-container">
+    <article class="step">
+      <h3>Returned images</h3>
+      <p>Labeled images from the classification.</p>
+      <div class="main-image-header">
+        <h2>Main Image: {{ getCurrentImageName() }}</h2>
+        <div class="image-counter">
+          {{ currentImageIndex + 1 }}/{{ images.length }}
+        </div>
+      </div>
+      <div class="main-image-section">
+        <div class="main-image-wrapper">
+          <img [src]="getCurrentImageUrl()" alt="Main Image description" />
+        </div>
+        <div class="button-container">
+          <button mat-icon-button color="primary" (click)="previousImage()">
+            <mat-icon>keyboard_arrow_left</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" (click)="nextImage()">
+            <mat-icon>keyboard_arrow_right</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <div class="sub-images-section">
+        <h2>Sub Images:</h2>
+        <div class="sub-images">
+          <div
+            class="sub-image-container"
+            *ngFor="let subImageUrl of getCurrentSubImageUrls(); let i = index"
+          >
+            <h3 class="sub-image-description">
+              <span
+                class="index"
+                [ngStyle]="{ color: 'blue', 'font-weight': 'bold' }"
+                >{{ getSubImageName(i)?.index }}.</span
+              >
+              {{ getSubImageName(i)?.description }}
+            </h3>
+
+            <div class="sub-image-wrapper">
+              <img [src]="subImageUrl" alt="Sub Image description" />
+            </div>
+          </div>
+        </div>
+        <div class="button-container">
+          <button
+            mat-icon-button
+            color="primary"
+            (click)="previousSubImage()"
+            [disabled]="currentSubImageIndex === 0"
+          >
+            <mat-icon>keyboard_arrow_left</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            color="primary"
+            (click)="nextSubImage()"
+            [disabled]="
+              !subImages ||
+              !subImages[currentImageIndex] ||
+              currentSubImageIndex + 4 >= subImages[currentImageIndex].length
+            "
+          >
+            <mat-icon>keyboard_arrow_right</mat-icon>
+          </button>
+        </div>
+      </div>
+    </article>
+  </section>
+</main>

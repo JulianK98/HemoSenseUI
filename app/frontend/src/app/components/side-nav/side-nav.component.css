@@ -1,0 +1,25 @@
+.box {
+  display: flex;
+  align-items: center;
+}
+
+.box mat-icon {
+  margin-right: 10px;
+}
+
+a {
+  border: 2px solid transparent;
+  border-radius: 5px;
+  margin: 5px;
+  transition: all 0.3s ease;
+}
+
+a:hover,
+a.active {
+  border-color: currentColor;
+}
+
+a.active .box mat-icon,
+a.active .box p {
+  color: blue;
+}

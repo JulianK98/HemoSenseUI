@@ -1,0 +1,65 @@
+<form>
+  <article class="step">
+    <h2>Active Learning Configuration</h2>
+    <div class="box2">
+      <div class="instructions">
+        <h3>Select Dataset</h3>
+        <p>
+          Select a dataset from the dropdown. From this dataset the model
+          selects the most uncertain images, which you will need to label.
+        </p>
+      </div>
+      <mat-form-field appearance="fill">
+        <mat-label>Select a dataset:</mat-label>
+        <mat-select
+          [(value)]="alConfig.dataset"
+          [(ngModel)]="alConfig.dataset"
+          (selectionChange)="onDatasetSelect()"
+          name="dataset"
+        >
+          <mat-option *ngFor="let dataset of datasets" [value]="dataset">{{
+            dataset
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <hr class="divider" />
+    <div class="box2">
+      <div class="instructions">
+        <h3>Set Number of Images</h3>
+        <p>Specify the number of blood cell images you want to label.</p>
+      </div>
+      <div class="example-label-container">
+        <label class="example-value-label">{{ alConfig.numImages }}</label>
+      </div>
+      <mat-slider
+        class="example-margin"
+        [disabled]="false"
+        [max]="40"
+        [min]="1"
+        [step]="1"
+        [discrete]="true"
+        [showTickMarks]="false"
+      >
+        <input
+          matSliderThumb
+          [(ngModel)]="alConfig.numImages"
+          name="numImages"
+        />
+      </mat-slider>
+    </div>
+    <hr class="divider" />
+    <div class="box3">
+      <button
+        mat-raised-button
+        color="primary"
+        matStepperNext
+        type="button"
+        [disabled]="!activateSubmit"
+        (click)="onNext()"
+      >
+        Next
+      </button>
+    </div>
+  </article>
+</form>

@@ -1,0 +1,34 @@
+services:
+  backend:
+    build: ./backend
+    restart: always
+    ports:
+      - "5001:5001"
+    volumes:
+      - ami_share:/data/ami/
+      - group_share:/data/group/
+    environment:
+      - AMI_SHARE_DIR=/data/ami/
+      - GROUP_SHARE_DIR=/data/group/
+      - CASSANDRA_CLUSTER_ADDR=database
+  frontend:
+    build: ./frontend
+    restart: always
+    ports:
+      - "80:80"
+    environment:
+      - BACKEND_BASE_URL=http://backend:5001
+    depends_on:
+      - backend
+
+volumes:
+  ami_share:
+    driver_opts:
+      type: cifs
+      o: username=ami,password=YmPAYeALIAnk,vers=3.0
+      device: //10.195.6.13/ami
+  group_share:
+    driver_opts:
+      type: cifs
+      o: username=group03,password=KStorPATeRHo,vers=3.0,file_mode=0777,dir_mode=0777,rw
+      device: //10.195.6.13/group03

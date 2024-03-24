@@ -1,0 +1,28 @@
+<div class="box">
+  <h2>Classification finished</h2>
+  <div class="basic-margin">
+    <div class="main-image-header">
+      <p>Number of blood cells classified:</p>
+      <div class="image-counter">{{ bcClassifiedCount }}/{{ bcCount }}</div>
+    </div>
+    <div class="box2">
+      <plotly-plot
+        *ngIf="showPlot"
+        [data]="labelsPlot.data"
+        [layout]="labelsPlot.layout"
+      ></plotly-plot>
+    </div>
+  </div>
+  <div class="basic-margin">
+    <button mat-raised-button matStepperPrevious type="button">Back</button>
+    <button
+      mat-raised-button
+      matStepperNext
+      color="primary"
+      type="button"
+      (click)="onSubmit()"
+    >
+      Submit
+    </button>
+  </div>
+</div>

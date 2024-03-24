@@ -1,0 +1,85 @@
+<div class="container">
+  <app-header title="About"></app-header>
+  <div class="content">
+    <div class="questions">
+      <div class="question-box" (click)="toggleBox('box1')">
+        <h3>
+          What is this tool?<span class="arrow" *ngIf="!box1Expanded">▼</span
+          ><span class="arrow" *ngIf="box1Expanded">▲</span>
+        </h3>
+        <p *ngIf="box1Expanded">
+          This tool is an advanced machine learning system designed to aid
+          medical professionals in classifying various types of blood cells.
+          It's meant to streamline the process, improve accuracy, and facilitate
+          early detection of potential hematological issues.
+        </p>
+      </div>
+      <div class="question-box" (click)="toggleBox('box2')">
+        <h3>
+          What data will the system use?<span
+            class="arrow"
+            *ngIf="!box2Expanded"
+            >▼</span
+          ><span class="arrow" *ngIf="box2Expanded">▲</span>
+        </h3>
+        <p *ngIf="box2Expanded">
+          The system will analyze images of blood samples obtained through
+          quantitative phase imaging. This allows observing cells without
+          staining. The main cell types are red blood cells, white blood cells,
+          platelets, aggregates, and out of focus cells.
+        </p>
+      </div>
+      <div class="question-box" (click)="toggleBox('box3')">
+        <h3>
+          How does the pipeline work?
+          <span class="arrow" *ngIf="!box3Expanded">▼</span
+          ><span class="arrow" *ngIf="box3Expanded">▲</span>
+        </h3>
+        <p *ngIf="box3Expanded">
+          It starts with segmenting and extracting cells from the images. Then
+          features are extracted, and the cells are labeled. Finally, models are
+          trained to classify cell types. Active learning helps select useful
+          samples for labeling.
+        </p>
+      </div>
+      <div class="question-box" (click)="toggleBox('box4')">
+        <h3>
+          What capabilities does the frontend provide?<span
+            class="arrow"
+            *ngIf="!box4Expanded"
+            >▼</span
+          ><span class="arrow" *ngIf="box4Expanded">▲</span>
+        </h3>
+        <p *ngIf="box4Expanded">
+          The frontend includes an interface for labeling cells, training
+          models, making predictions, and correcting errors. It visualizes
+          results and explains model decisions. The goal is an intuitive,
+          responsive UI to present analyses and aid diagnosis. Creativity is
+          encouraged for visuals, interpretations, and more.
+        </p>
+      </div>
+    </div>
+    <div class="contact-box">
+      <h3 class="title">Group 03 members</h3>
+      <div class="contact-item">
+        <div class="contact-icon"><i class="fas fa-users"></i></div>
+        <div class="contact-details">
+          <a>Hector Betancourt</a>
+          <a>Hukumraj Singh Deora</a>
+          <a>Julian Kalhammer</a>
+          <a>Ankit Kumar</a>
+          <a>Minghui Li</a>
+          <a>Michel Osswald</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button
+    class="btn btn-back"
+    routerLink="/"
+    routerLinkActive="active"
+    ariaCurrentWhenActive="page"
+  >
+    Back
+  </button>
+</div>

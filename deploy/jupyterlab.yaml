@@ -1,0 +1,78 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jupyterlab
+  labels:
+    app: jlab
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jlab
+  template:
+    metadata:
+      labels:
+        app: jlab
+    spec:
+      securityContext:
+        runAsUser: 0
+        fsGroup: 0
+      containers:
+        - name: jupyterlab
+          image: tverous/pytorch-notebook:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+          - containerPort: 8888
+          command:
+            - /bin/bash
+            - -c
+            - |
+              jupyter lab --LabApp.token='' --LabApp.password='' --LabApp.ip='0.0.0.0' --LabApp.allow_root=True --no-browser
+          volumeMounts:
+            - name: jupyterlab-data
+              mountPath: /home/jlab/
+            - mountPath: "/data/ami/"
+              name: share-ami
+            - mountPath: "/data/group/"
+              name: share-group
+          resources:
+            requests:
+              memory: 500Mi
+              cpu: 250m
+            limits:
+              aliyun.com/gpu-mem: 3
+      restartPolicy: Always
+      volumes:
+      - name: jupyterlab-data
+        persistentVolumeClaim:
+          claimName: jupyterlab-pvc
+      - name: share-ami
+        persistentVolumeClaim:
+          claimName: pvc-share-ami
+      - name: share-group
+        persistentVolumeClaim:
+          claimName: pvc-share-group
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jupyterlab-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jlab-service
+spec:
+  selector:
+    app: jlab
+  ports:
+    - protocol: TCP
+      port: 8888
+      targetPort: 8888

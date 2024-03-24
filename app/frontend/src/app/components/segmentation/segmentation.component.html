@@ -1,0 +1,65 @@
+<div class="container">
+  <app-header title="Segment Blood Cell Images"></app-header>
+</div>
+
+<form>
+  <article class="step">
+    <div class="box2">
+      <div class="instructions">
+        <h3>Select Dataset</h3>
+        <p>
+          Specify a dataset from the AMI file share. The blood cell images in
+          the dataset then get segmented and are stored seperately.
+        </p>
+        <p>
+          <b>Only segmented datasets can be used for active learning!</b>
+        </p>
+        <p>
+          <b>The segmentation process can take several hours!</b>
+        </p>
+      </div>
+      <mat-form-field appearance="fill">
+        <mat-label>Select a dataset:</mat-label>
+        <mat-select
+          [(value)]="segmentConfig.dataset"
+          [(ngModel)]="segmentConfig.dataset"
+          (selectionChange)="onDatasetSelect()"
+          name="dataset"
+        >
+          <mat-option
+            *ngFor="let dataset of segmentDatasets.datasets"
+            [value]="dataset"
+            >{{ dataset }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <hr class="divider" />
+    <div class="box3">
+      <button
+        mat-raised-button
+        type="button"
+        routerLink="/"
+        routerLinkActive="active"
+      >
+        Return
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        (click)="onStartSegmentation()"
+        [disabled]="!activateSubmit"
+      >
+        Start Segmentation
+      </button>
+    </div>
+    <hr class="divider" />
+    <div class="box3">
+      <p>
+        <b>{{ message }}</b>
+      </p>
+    </div>
+  </article>
+</form>

@@ -1,0 +1,50 @@
+.box {
+  margin: 1px;
+  overflow: auto;
+  min-height: 200px;
+  border: 1px solid rgb(0, 52, 95);
+  padding: 1px;
+  border-radius: 5px;
+  background-color: #e9e9e9;
+}
+.image {
+  overflow: auto;
+  border-radius: 5px;
+  background-color: #e9e9e9;
+  border: 1px solid rgb(0, 52, 95);
+}
+
+.image-box {
+  justify-content: center;
+  align-items: center;
+}
+
+.basic-margin {
+  margin: 1px;
+}
+
+.image-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-counter {
+  background-color: #50009b;
+  color: white;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  margin-right: 20px;
+  margin-left: 15px;
+}
+
+.main-image-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

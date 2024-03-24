@@ -1,0 +1,55 @@
+<div class="container">
+  <app-header title="Classification"></app-header>
+</div>
+<div class="container" [class.loading]="isLoading">
+  <div class="loading-spinner">
+    <div class="spinner"></div>
+  </div>
+  <main class="content">
+    <section class="steps-container">
+      <article class="step">
+        <h2>Step 1: Select Dataset</h2>
+        <hr />
+
+        <div class="instructions">
+          <h3>Select an Option</h3>
+          <p>
+            Select a dataset from the dropdown to choose the data for
+            classification.
+          </p>
+        </div>
+        <app-list-selection></app-list-selection>
+
+        <hr class="divider" />
+
+        <div class="start-classification">
+          <h3>Start Classification</h3>
+          <p>
+            Proceed with the classification process using the selected dataset
+            and options.
+          </p>
+          <button class="btn start-button" type="button" (click)="startClassification()">
+            Start Classification
+          </button>          
+        </div>
+      </article>
+
+      <article class="step">
+        <h2>Step 2: View Results</h2>
+        <hr />
+        <app-image-viewer #viewer></app-image-viewer>
+      </article>
+    </section>
+
+    <nav class="back-button">
+      <button
+        class="btn"
+        routerLink="/"
+        routerLinkActive="active"
+        ariaCurrentWhenActive="page"
+      >
+        Back
+      </button>
+    </nav>
+  </main>
+</div>

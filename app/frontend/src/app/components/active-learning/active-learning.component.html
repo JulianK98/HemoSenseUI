@@ -1,0 +1,36 @@
+<div class="container">
+  <app-header title="Improve Model"></app-header>
+</div>
+
+<div>
+  <mat-stepper orientation="horizontal" linear>
+    <mat-step label="Configuration" editable="false">
+      <app-al-config
+        *ngIf="showConfig"
+        [datasets]="datasets"
+        (onNextClick)="getUnlabeldImages($event)"
+      ></app-al-config>
+    </mat-step>
+    <mat-step label="Classifiy">
+      <app-al-classify
+        *ngIf="showClassify"
+        [alClassify]="alClassify"
+        (onFinishClick)="updateLabels($event)"
+      ></app-al-classify>
+    </mat-step>
+    <mat-step label="Submit" editable="false">
+      <app-submit
+        *ngIf="showSubmit"
+        [initAlLabbels]="alLabels"
+        [alLabelsEmitter]="alLabelsEmitter"
+        (onSubmitEvent)="sendLabels()"
+      ></app-submit>
+    </mat-step>
+    <mat-step label="Finish">
+      <app-al-performance
+        *ngIf="showPerformance"
+        [message]="sendLabelsSuccessMsg"
+      ></app-al-performance>
+    </mat-step>
+  </mat-stepper>
+</div>

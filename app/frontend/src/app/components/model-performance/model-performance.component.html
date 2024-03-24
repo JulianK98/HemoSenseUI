@@ -1,0 +1,72 @@
+<div class="container">
+  <app-header title="Model Performance"></app-header>
+</div>
+
+<mat-grid-list cols="10" rowHeight="1:1">
+  <mat-grid-tile colspan="7" rowspan="2">
+    <div class="box2">
+      <plotly-plot
+        *ngIf="showPlots"
+        [data]="accuracyPlot.data"
+        [layout]="accuracyPlot.layout"
+      ></plotly-plot>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="3" rowspan="2">
+    <div class="box2">
+      <plotly-plot
+        *ngIf="showPlots"
+        [data]="currAccuracy.data"
+        [layout]="currAccuracy.layout"
+      ></plotly-plot>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="7" rowspan="2">
+    <div class="box2">
+      <plotly-plot
+        *ngIf="showPlots"
+        [data]="f1Plot.data"
+        [layout]="f1Plot.layout"
+      ></plotly-plot>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="3" rowspan="2">
+    <div class="box2">
+      <plotly-plot
+        *ngIf="showPlots"
+        [data]="currF1.data"
+        [layout]="currF1.layout"
+      ></plotly-plot>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="7" rowspan="2">
+    <div class="box2">
+      <plotly-plot
+        *ngIf="showPlots"
+        [data]="numLabelsPlot.data"
+        [layout]="numLabelsPlot.layout"
+      ></plotly-plot>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="3" rowspan="2">
+    <div class="box2">
+      <plotly-plot
+        *ngIf="showPlots"
+        [data]="currNumLabels.data"
+        [layout]="currNumLabels.layout"
+      ></plotly-plot>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<div class="box3">
+  <button
+    mat-raised-button
+    color="primary"
+    type="button"
+    routerLink="/"
+    routerLinkActive="active"
+  >
+    Return
+  </button>
+</div>

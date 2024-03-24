@@ -1,0 +1,146 @@
+.range-selector {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border: 1px solid #333;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .range-selector > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .range-selector > div:last-child {
+    margin-bottom: 0;
+  }
+  
+  .range-selector mat-form-field {
+    width: 100px;
+    margin-right: 10px;
+  }
+  
+  .range-selector mat-form-field:last-child {
+    margin-right: 0;
+  }
+  
+  mat-selection-list {
+    max-height: 200px;
+    overflow: auto;
+    margin-bottom: 20px;
+    background-color: #f5f5f5; /* Light gray background color */
+  }
+  
+  .mat-list-option {
+    color: #333333; /* Dark gray text color */
+  }
+  
+  .range-selector button {
+    margin-left: 10px;
+    background-color: #007bff; /* Blue color */
+    color: #fff; /* White text color */
+    border: none;
+  }
+  
+  .range-selector button:hover {
+    background-color: #0056b3; /* Darker shade of blue on hover */
+  }
+  
+  .range-selector button:active {
+    background-color: #004099; /* Even darker shade of blue when active */
+  }
+  
+  .range-selector button:focus {
+    outline: none; /* Remove outline on focus */
+  }
+  
+  .range-selector button:disabled {
+    background-color: #cccccc; /* Light gray when disabled */
+    cursor: not-allowed;
+  }
+  
+  .range-selector button:not(:last-child) {
+    margin-right: 10px;
+  }
+  
+  .range-selector button.remove-button {
+    background-color: #ffcccc; /* Light red color for X button */
+    color: #333; /* Dark text color for X button */
+  }
+  
+  .range-selector button.remove-button:hover {
+    background-color: #ff9999; /* Darker shade of red on hover */
+  }
+  
+  .range-selector button.remove-button:focus {
+    background-color: #ffcccc; /* Light red color for X button on focus */
+    box-shadow: none; /* Remove default focus box shadow */
+  }
+  
+  .disabled-content {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  
+  .options-selected-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .options-selected-container p {
+    margin: 0;
+  }
+  
+  .options-selected-container .options-selected-text {
+    background-color: #007bff; /* Blue background color */
+    color: #fff; /* White text color */
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-left: 10px;
+  }
+  
+  .range-selector .instructions h3,
+  .range-selector .range-selection h3 {
+    color: #333333; /* Dark gray text color */
+    font-size: 18px; /* Adjust the font size as desired */
+    margin-bottom: 10px; /* Add some bottom margin for separation */
+  }
+  
+  .range-selector .instructions p,
+  .range-selector .range-selection p {
+    color: #333333;
+    font-size: 16px;
+  }
+  
+  .image-counter {
+    background-color: #007BFF;
+    color: white;
+    width: 350px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    margin-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .image-counter-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .image-counter-container button {
+    margin-left: 20px;
+  }
+  

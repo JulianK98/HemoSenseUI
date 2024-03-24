@@ -1,0 +1,112 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #f0f0f0;
+}
+
+.app-header {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 90vw;
+  max-width: 1200px;
+  min-height: 80vh;
+  background: #fff;
+  box-shadow: 0px 10px 20px rgba(0,0,0,0.1);
+  border-radius: 20px;
+  overflow: auto;
+  padding: 20px;
+}
+
+
+.content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.questions {
+  width: 66.67%;
+  padding: 20px;
+}
+
+.contact-box {
+  width: 33.33%;
+  padding: 20px;
+  background: #fafafa;
+}
+
+.contact-box, .question-box {
+  border-radius: 10px;
+  margin-bottom: 20px;
+  transition: box-shadow 0.3s ease-in-out;
+  padding: 20px;
+  box-shadow: 0px 10px 20px rgba(0,0,0,0.05);
+}
+
+.question-box.expanded {
+  background: #eee;
+}
+
+.contact-box .title, .question-box h3 {
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.contact-box ul li a, .question-box p {
+  color: #666;
+}
+
+.arrow {
+  float: right;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  background: #007BFF;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 20px;
+  cursor: pointer;
+  margin: 20px auto;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #0056b3;
+}
+
+.contact-icon {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.contact-details a {
+  display: block;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .container, .content {
+    flex-direction: column;
+  }
+
+  .questions, .contact-box {
+    width: 100%;
+  }
+}

@@ -1,0 +1,312 @@
+<mat-grid-list cols="6" rowHeight="4:1">
+  <mat-grid-tile colspan="2" rowspan="1">
+    <h3>Blood Cell Image:</h3>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="3" rowspan="1">
+    <div class="main-image-header">
+      <h3>Segmented Blood Cells:</h3>
+      <div class="image-counter">
+        <h4>{{ currBCBatch + 1 }}/{{ bcBatchNum }}</h4>
+      </div>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="1" rowspan="1">
+    <div class="main-image-header">
+      <h3>Image:</h3>
+      <div class="image-counter">
+        <h4>{{ currImage + 1 }}/{{ alClassify.numImages }}</h4>
+      </div>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
+<mat-grid-list cols="6" rowHeight="3.5:1">
+  <mat-grid-tile colspan="2" rowspan="10">
+    <div class="box">
+      <mat-card class="padding">
+        <img
+          mat-card-image
+          [src]="'data:image/jpeg;base64,' + alClassify.images[currImage]"
+          alt="Blood Cell Image"
+        />
+      </mat-card>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="1" rowspan="4.5">
+    <div *ngIf="showImages[0]" class="image-box">
+      <div class="image-title">
+        <h4>{{ currBCBatch * 6 + 1 }}</h4>
+      </div>
+      <div class="image">
+        <img
+          [src]="
+            'data:image/jpeg;base64,' +
+            alClassify.bloodCells[currImage][currBCBatch * 6 + 0]
+          "
+          alt="Segmented Blood Cell"
+          style="width: 160px; height: 160px"
+        />
+      </div>
+
+      <p>
+        Certainty:
+        {{ alClassify.certainty[currImage][currBCBatch * 6 + 0] }}
+      </p>
+      <div class="basic-margin">
+        <select
+          name="labels"
+          id="labelOptions"
+          (change)="selectLabel($event, currBCBatch * 6 + 0)"
+        >
+          <option
+            *ngFor="let label of labelOptions"
+            [value]="label[1]"
+            [selected]="
+              label[1] == alLabels.labels[currImage][currBCBatch * 6 + 0]
+                ? true
+                : false
+            "
+          >
+            {{ label[0] }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="1" rowspan="4.5">
+    <div *ngIf="showImages[1]" class="image-box">
+      <div class="image-title">
+        <h4>{{ currBCBatch * 6 + 2 }}</h4>
+      </div>
+      <div class="image">
+        <img
+          [src]="
+            'data:image/jpeg;base64,' +
+            alClassify.bloodCells[currImage][currBCBatch * 6 + 1]
+          "
+          alt="Segmented Blood Cell"
+          style="width: 160px; height: 160px"
+        />
+      </div>
+
+      <p>
+        Certainty:
+        {{ alClassify.certainty[currImage][currBCBatch * 6 + 1] }}
+      </p>
+      <div class="basic-margin">
+        <select
+          name="labels"
+          id="labelOptions"
+          (change)="selectLabel($event, currBCBatch * 6 + 1)"
+        >
+          <option
+            *ngFor="let label of labelOptions"
+            [value]="label[1]"
+            [selected]="
+              label[1] == alLabels.labels[currImage][currBCBatch * 6 + 1]
+                ? true
+                : false
+            "
+          >
+            {{ label[0] }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="1" rowspan="4.5">
+    <div *ngIf="showImages[2]" class="image-box">
+      <div class="image-title">
+        <h4>{{ currBCBatch * 6 + 3 }}</h4>
+      </div>
+      <div class="image">
+        <img
+          [src]="
+            'data:image/jpeg;base64,' +
+            alClassify.bloodCells[currImage][currBCBatch * 6 + 2]
+          "
+          alt="Segmented Blood Cell"
+          style="width: 160px; height: 160px"
+        />
+      </div>
+
+      <p>
+        Certainty:
+        {{ alClassify.certainty[currImage][currBCBatch * 6 + 2] }}
+      </p>
+      <div class="basic-margin">
+        <select
+          name="labels"
+          id="labelOptions"
+          (change)="selectLabel($event, currBCBatch * 6 + 2)"
+        >
+          <option
+            *ngFor="let label of labelOptions"
+            [value]="label[1]"
+            [selected]="
+              label[1] == alLabels.labels[currImage][currBCBatch * 6 + 2]
+                ? true
+                : false
+            "
+          >
+            {{ label[0] }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="1" rowspan="10">
+    <button mat-raised-button type="button" (click)="onPreviousImage()">
+      Previous Image
+    </button>
+    <button
+      *ngIf="currImage != alClassify.numImages - 1"
+      mat-raised-button
+      color="primary"
+      type="button"
+      (click)="onNextImage()"
+    >
+      Next Image
+    </button>
+    <button
+      *ngIf="currImage == alClassify.numImages - 1"
+      mat-raised-button
+      matStepperNext
+      color="primary"
+      type="button"
+      (click)="onFinish()"
+    >
+      Finish
+    </button>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="1" rowspan="4.5">
+    <div *ngIf="showImages[3]" class="image-box">
+      <div class="image-title">
+        <h4>{{ currBCBatch * 6 + 4 }}</h4>
+      </div>
+      <div class="image">
+        <img
+          [src]="
+            'data:image/jpeg;base64,' +
+            alClassify.bloodCells[currImage][currBCBatch * 6 + 3]
+          "
+          alt="Segmented Blood Cell"
+          style="width: 160px; height: 160px"
+        />
+      </div>
+
+      <p>
+        Certainty:
+        {{ alClassify.certainty[currImage][currBCBatch * 6 + 3] }}
+      </p>
+      <div class="basic-margin">
+        <select
+          name="labels"
+          id="labelOptions"
+          (change)="selectLabel($event, currBCBatch * 6 + 3)"
+        >
+          <option
+            *ngFor="let label of labelOptions"
+            [value]="label[1]"
+            [selected]="
+              label[1] == alLabels.labels[currImage][currBCBatch * 6 + 3]
+                ? true
+                : false
+            "
+          >
+            {{ label[0] }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="1" rowspan="4.5">
+    <div *ngIf="showImages[4]" class="image-box">
+      <div class="image-title">
+        <h4>{{ currBCBatch * 6 + 5 }}</h4>
+      </div>
+      <div class="image">
+        <img
+          [src]="
+            'data:image/jpeg;base64,' +
+            alClassify.bloodCells[currImage][currBCBatch * 6 + 4]
+          "
+          alt="Segmented Blood Cell"
+          style="width: 160px; height: 160px"
+        />
+      </div>
+
+      <p>
+        Certainty:
+        {{ alClassify.certainty[currImage][currBCBatch * 6 + 4] }}
+      </p>
+      <div class="basic-margin">
+        <select
+          name="labels"
+          id="labelOptions"
+          (change)="selectLabel($event, currBCBatch * 6 + 4)"
+        >
+          <option
+            *ngFor="let label of labelOptions"
+            [value]="label[1]"
+            [selected]="
+              label[1] == alLabels.labels[currImage][currBCBatch * 6 + 4]
+                ? true
+                : false
+            "
+          >
+            {{ label[0] }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="1" rowspan="4.5">
+    <div *ngIf="showImages[5]" class="image-box">
+      <div class="image-title">
+        <h4>{{ currBCBatch * 6 + 6 }}</h4>
+      </div>
+      <div class="image">
+        <img
+          [src]="
+            'data:image/jpeg;base64,' +
+            alClassify.bloodCells[currImage][currBCBatch * 6 + 5]
+          "
+          alt="Segmented Blood Cell"
+          style="width: 160px; height: 160px"
+        />
+      </div>
+
+      <p>
+        Certainty:
+        {{ alClassify.certainty[currImage][currBCBatch * 6 + 5] }}
+      </p>
+      <div class="basic-margin">
+        <select
+          name="labels"
+          id="labelOptions"
+          (change)="selectLabel($event, currBCBatch * 6 + 5)"
+        >
+          <option
+            *ngFor="let label of labelOptions"
+            [value]="label[1]"
+            [selected]="
+              label[1] == alLabels.labels[currImage][currBCBatch * 6 + 5]
+                ? true
+                : false
+            "
+          >
+            {{ label[0] }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="6" rowspan="0.5">
+    <button mat-icon-button type="button" (click)="onBack()">
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+    <button mat-icon-button color="primary" type="button" (click)="onNext()">
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
+  </mat-grid-tile>
+</mat-grid-list>
